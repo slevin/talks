@@ -5,6 +5,13 @@ slidenumbers: true
 
 ---
 
+disclaimer
+
+this is my story of better
+find yours
+
+---
+
 What is OOP?
 
 _hackneyed question, I know_
@@ -219,6 +226,26 @@ introduced in the process
 
 ---
 
+if there's anything to take away from this, its this
+idea of the importance of change.
+
+for every feature you implement, make a little mental todo
+(or a real todo, I do)
+that says, ok I got this working; can I move things around
+so it will be easier to change this code in the future
+(who may be you, with my wtf face on)
+
+---
+
+
+when I first heard the idea watching Uncle Bob videos
+I brushed it off, "yeah interesting whatever"
+
+but day in day out over the past year its hit me over and
+over again, "oh yeah, totally!"
+
+---
+
 so in order for oop to be helpful, oop must provide
 features that help manage change
 
@@ -232,6 +259,8 @@ some quotation
 
 lisp macros
 
+(richard gabriel calls it compression)
+
 ---
 
 the interface is the primary mechanism for enabling this
@@ -240,6 +269,10 @@ duality of syntax
 I can have a block of code that works one way, and when it needs to
 behave differently I can enable that behavior change without having to
 change other parts. its variability of behavior its polymorphism
+
+---
+
+example of setters and getters as on obvious interface separation
 
 ---
 
@@ -285,6 +318,8 @@ cargo cults and cargo cult programming
 
 image, story behind the term
 
+maybe more of a conclusion
+
 ---
 
 mistaking the artifacts of a process for the process itself
@@ -329,6 +364,15 @@ definition: refactoring vs programming
 how to find these seams, where to put code, and how to do it
 
 code smells
+
+---
+I think we have an awkward relationship with the code we write.
+We feel uncomfortable with some choices, worried we didn't do it as well as others
+
+its important to get a better relationship and see it as part of a process; a process
+of continual improvement and adjustment; the lessons in refactoring can help us take
+a more mature position
+
 
 ---
 
@@ -397,14 +441,139 @@ its not weird is normal, but I propose its suboptimal
 
 ---
 
+The refactoring book has a number of places to start looking for places where oop can help
+organize code and get dependencies under control
 
+which they call code smells. Not because your code necessarily stinks but because things
+are starting to get stale and it might be worth a little time cleaning out the fridge
+
+
+---
+
+the easiest place to start finding ways to improve organization is duplicated code
+
+duplicated blocks of code indicates that there is an abstract concept that has
+meaning in the logic. when you have duplicated code, pull it out into a function
+give it a good name and start combining
+
+this first step always starts uncovering things for me and I start pulling apart more
+code and giving it better names and a few hours later I'm usually happy with the results
+
+plus its fun
+
+---
+
+one problem I've definitely felt and I hear people have is as code starts getting broken
+up you have to start looking around in lots of places to understand what anything does
+
+I hear you, I've felt that. Its also the case that we might over estimate how easy to understand
+100 line methods and 1000 line classes really are. Those are really daunting structures. And
+I'd rather see those broken down to a few well named classes with well named functions.
+
+Naming is hard, and I'm very guilty of giving things bad names. But its also part of the process
+and we just keep working it to make things better.
+
+---
+
+I think the process of continual refactoring sheds a lot of light on Design Patterns.
+
+As abstractions to build with, they feel snobby, complex, and overblown. But from the perspective
+of refactoring as we begin to get our dependencies under control, they start showing up as
+useful structures that enable our code to handle change without massive refactorings.
+
+---
+
+when viewed through the lens of refactoring for dependency management as part of the process
+we see new problems to solve
+
+these are fun problems
+
+---
+
+using oo to create abstractions with which we can isolate changes from other parts of the
+code is a very useful tool to solve some of these problems
+
+---
+
+* when used like this oo is a scalpal not a building block
+
+---
+
+oo becomes more than just a tool for conceptualization of the problem space
+
+eg, I'm going to write some network code so let me create a class called NetwrokManager
+
+its fine for that but it doesn't offer any features particularly more powerful than just
+
+opening a file and start typing in functions like you would do in C
+
+---
+
+the overall code starts to take on a component feel where parts of your program resemble libraries
+like the ones given to us by apple that we can use to build the features of our app
+
+---
+
+simple made easy
+complex vs simple
+ rich hickey talk
+
+---
+
+some people complain that code broken down to abstractions is harder to follow
+
+I understand and can share this opinion at times, but I don't think that is an
+inherent problem with abstractions
+
+
+* you don't know how apple's code works, not a single line of it
+but you depend on it vitally
+
+---
+
+* just like that story how compared to the number of bacteria cells in your gut to number
+of cells that are you is a tiny fraction; the number of lines
+
+little graph (bill joy/linus torvalds joke)
+
+---
+
+* oop is not the only way to provide benefits
+
+functional, static analyzers, better language idioms where the default choice
+ of the language (the lazy choice) is the choice that makes future change easier
+
+---
+
+most importantly I think is recognizing that the most important thing we can do is
+pay attention to our development process
+
+we have strange relationship with the code we write and can get emotionally invested
+in it when we are proud of it; or feel terrible when we mess up; or worry that other
+people are writing better code that we aren't capable of
+
+---
+
+the truth is good code is the result of good process applied over and over; we will never
+get things perfect, but if we distance ourselves from the code and invest emotionally in
+our process then the code will be goo
+
+* be emotionally invested in your process not the code that results from that process
+
+---
+
+
+
+style, mostly a matter of taste; taste is hard to target
+we have to reach for things that we believe are more objective
+
+eg, I could write all my function names in russian some people
+would prefer that I'm sure
 
 
 do I want to talk about different types of oop and how they support this?
 
 clojure/swift/rust/go are similar
-
-memory access is just set of behaviors too (structs)
 
 class based oop is just namespaces
   and a way to provide subtypes
@@ -412,43 +581,6 @@ class based oop is just namespaces
 
 plus various degree of permission/hiding depending on language
 - this isn't abstraction, its safety which has its ups and downs
-
-
-
-
-not just breaking down that makes things easier to code
-but breaking things down to easier to understand
-doing just the same as what other people understand is lame
-why program to the lowest common denominator overly tricky is
-not a good end in itself but if it solves a real problem its worth it
-
-
-the question is one class with two sets of methods and two sets of state
-completely separate; is that a problem?
-all that is some sort of physical locality classes are kind of artificial
-they are just a file and an open and close brace and implicit namespacing
-
-
-holywood pattern and given abstractions
-lots of us live in some sort of framework where all the pieces are
-given to us by the language or the framework and we basically just
-assemble them like legos; we are given the pieces and the places
-but we aren't using tools of abstraction to simplify our problem, we
-are just using the pieces we've been given
-
-duality of syntax by Doug Hoyte ( show book)
-(also called compression by Richard Gabriel)
-that's at the heart of all these tools from variables to function
-to polymorphism, structs etc
-
-^^^^^^ that is the key point, thats what we are after
-how can we present a feature with less code
-and how can we add new features or change old ones with less changes
-if we have duality of syntax we can make changes without having to change
-lots of other parts
-patterns provide duality of syntax on a larger abstraction level; it permits
-change
-
 
 * type based ploymorphism is an abstracted if statement
 it can't change but in lua and javascript it can but
@@ -458,32 +590,29 @@ those you can reassign the path
 in lua even namespaces are part of the language in tables
  its brilliant
 
-* oop is not the only way to provide benefits
-
 * over engineered example of hello world
 http://developers.slashdot.org/comments.pl?sid=33602&cid=3634763
 
-* some slides that turn the gradual easy one into a mess while the first one
- looks basically the same
 
-* abstracting solves a problem
 
-* good abstractions cant be guessed at, they are implemented to solve real problems
- those problems come about over the course of development
- so one has to refactor to those abstractions
- without tests refactoring is error prone and difficult
- ergo without tests, creating good abstractions is error prone and difficult
- testing code that wasn't written to test is difficult, and tedious
- tdd is writing code along with tests
 
-* duplication is the root of all evil
 
-* can there be objectively better code?
+story arc
 
-* better code has less duplication
-
-* better code has surrounding code at the same level of abstraction
-
-* physical location / conceptual location of code
-
-* patterns are something to refactor to, not something to build with
+what is oo?
+its interfaces
+why oo; if its worthwhile it must enable better
+what's better?
+reducing the burden of change is better
+therefore oo is worthwhile if it reduces the burden of change
+key concept code that does job with reduced burden of change >> code that does its job
+there is something you can do with oo that you cannot with procedural progrmming
+...and that's enabling different run time behavior
+same code, different behavior == less dependencies and less code to change
+too hard to write code this way, so we add refactoring as an extra step after implementing
+if you want code that just does its job just write it
+if you want code that is easy to change refactor (writing is editing)
+and this gives us problems to solve
+refactoring book, architectures, design patterns all point us to possible
+directions to take the code that will help manage dependencies
+and they all depend on oo
