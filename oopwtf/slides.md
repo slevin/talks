@@ -5,7 +5,12 @@ slidenumbers: true
 
 ---
 
-disclaimer
+#Disclaimer
+
+graph of line
+
+![right 90%](processdiff.png)
+
 
 this is my story of better
 find yours
@@ -16,40 +21,164 @@ What is OOP?
 
 _hackneyed question, I know_
 
----
-
-classic shape example
-functions plus data
+^functions + data, classes, polymorphism, encapsulation, protection
 
 ---
 
-lisp example of oop
+Lisp
+
+```lisp
+(defclass srt-time ()
+  ((hr :initarg :hr :initform 0 :accessor hr)
+   (mi :initarg :mi :initform 0 :accessor mi)
+   (se :initarg :se :initform 0 :accessor se)
+   (ms :initarg :ms :initform 0 :accessor ms))
+  (:documentation "Time format for srt"))
+
+(defgeneric display (what)
+  (:documentation "Returns string that represents the object"))
+
+(defgeneric normalise (time)
+  (:documentation "Fix overflow of fields"))
+
+(defmethod normalise ((time srt-time))
+  (with-slots (hr mi se ms) time
+    (loop until (< ms 1000) do (decf ms 1000) (incf se))
+    (loop until (< se 60) do (decf se 60) (incf mi))
+    (loop until (< mi 60) do (decf mi 60) (incf hr)))
+  time)
+
+(defmethod display ((time srt-time))
+  (normalise time)
+  (with-slots (hr mi se ms) time
+    (format nil "~2,'0d:~2,'0d:~2,'0d,~3,'0d" hr mi se ms)))
+
+(defun make-srt-time (arglist)
+  (destructuring-bind (hr mi se ms) arglist
+  (make-instance 'srt-time :hr hr :mi mi :se se :ms ms)))
+```
+
+^30 years old but is the model for clojure, go, rust
+where implicit namespacing of methods doesn't restrict
+adding new methods
+
 
 ---
 
-java example of oop with patterns
+Java
+
+```java
+public interface MessageStrategy {
+    public void sendMessage();
+}
+
+public abstract class AbstractStrategyFactory {
+    public abstract MessageStrategy createStrategy(MessageBody mb);
+}
+
+public class MessageBody {
+    Object payload;
+
+    public Object getPayload() {
+        return payload;
+    }
+
+    public void configure(Object obj) {
+        payload = obj;
+    }
+
+    public void send(MessageStrategy ms) {
+        ms.sendMessage();
+    }
+}
+
+public class DefaultFactory extends AbstractStrategyFactory {
+    private DefaultFactory() {;}
+    static DefaultFactory instance;
+
+    public static AbstractStrategyFactory getInstance() {
+        if (instance==null) instance = new DefaultFactory();
+        return instance;
+    }
+
+    public MessageStrategy createStrategy(final MessageBody mb) {
+        return new MessageStrategy() {
+            MessageBody body = mb;
+            public void sendMessage() {
+                Object obj = body.getPayload();
+                System.out.println((String)obj);
+            }
+        };
+    }
+}
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        MessageBody mb = new MessageBody();
+        mb.configure("Hello World!");
+        AbstractStrategyFactory asf = DefaultFactory.getInstance();
+        MessageStrategy strategy = asf.createStrategy(mb);
+        mb.send(strategy);
+    }
+}
+```
+
+^patterns make for easy teasing but they are cooler than the jokes
+would let on
 
 ---
 
-rails example with huge model
+Lua
+
+```lua
+Account = {balance = 0}
+
+function Account:new (o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function Account:deposit (v)
+    self.balance = self.balance + v
+end
+
+function Account:withdraw (v)
+    if v > self.balance then error"insufficient funds" end
+    self.balance = self.balance - v
+end
+
+SpecialAccount = Account:new()
+
+function SpecialAccount:withdraw (v)
+    if v - self.balance >= self:getLimit() then
+        error"insufficient funds"
+    end
+
+    self.balance = self.balance - v
+end
+
+function SpecialAccount:getLimit ()
+    return self.limit or 0
+end
+```
+
+^like Javascript construction is same language as rest of code
 
 ---
 
-objective-c example with huge controller
+Objective-c
+
+![inline](objc.png)
 
 ---
 
-scheme version
+Lisp, Lua, Java, Objective-c are subclasses of _Object Oriented Language_
 
 ---
 
-javascript example with callbacks going off the side
-
----
-
-given those are all subclasses of our abstract oop class
-and how different those look it would seem theres not
-much left that abstract class, so maybe its just an interface?
+## _Object Oriented Language_ is just an interface
 
 ---
 
@@ -203,6 +332,12 @@ be changed; that has to be done in a way that
 still satisfies existing constraints
 
 that's hard
+
+---
+
+variable behavior is necessarily a reduction of internal constraints
+which means it is easier to change from a mathematical point of view
+
 
 ---
 
@@ -592,8 +727,6 @@ in lua even namespaces are part of the language in tables
 
 * over engineered example of hello world
 http://developers.slashdot.org/comments.pl?sid=33602&cid=3634763
-
-
 
 
 
