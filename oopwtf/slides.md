@@ -1,4 +1,3 @@
-footer: @ Sean Levin, 2015
 slidenumbers: true
 
 # OOPWTF?
@@ -7,17 +6,18 @@ slidenumbers: true
 
 #Disclaimer
 
-graph of line
-
 ![right 90%](processdiff.png)
 
+* No silver bullets
+* In search of a better software process
 
-this is my story of better
-find yours
+^attempt to roll up a number of thoughts I've had the past year
+
+^ comments are welcome
 
 ---
 
-What is OOP?
+# What is OOP?
 
 _hackneyed question, I know_
 
@@ -61,6 +61,46 @@ Lisp
 ^30 years old but is the model for clojure, go, rust
 where implicit namespacing of methods doesn't restrict
 adding new methods
+
+---
+
+Lua
+
+```lua
+Account = {balance = 0}
+
+function Account:new (o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function Account:deposit (v)
+    self.balance = self.balance + v
+end
+
+function Account:withdraw (v)
+    if v > self.balance then error"insufficient funds" end
+    self.balance = self.balance - v
+end
+
+SpecialAccount = Account:new()
+
+function SpecialAccount:withdraw (v)
+    if v - self.balance >= self:getLimit() then
+        error"insufficient funds"
+    end
+
+    self.balance = self.balance - v
+end
+
+function SpecialAccount:getLimit ()
+    return self.limit or 0
+end
+```
+
+^like Javascript construction is same language as rest of code
 
 
 ---
@@ -128,45 +168,6 @@ would let on
 
 ---
 
-Lua
-
-```lua
-Account = {balance = 0}
-
-function Account:new (o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    return o
-end
-
-function Account:deposit (v)
-    self.balance = self.balance + v
-end
-
-function Account:withdraw (v)
-    if v > self.balance then error"insufficient funds" end
-    self.balance = self.balance - v
-end
-
-SpecialAccount = Account:new()
-
-function SpecialAccount:withdraw (v)
-    if v - self.balance >= self:getLimit() then
-        error"insufficient funds"
-    end
-
-    self.balance = self.balance - v
-end
-
-function SpecialAccount:getLimit ()
-    return self.limit or 0
-end
-```
-
-^like Javascript construction is same language as rest of code
-
----
 
 Objective-c
 
@@ -174,113 +175,129 @@ Objective-c
 
 ---
 
-Lisp, Lua, Java, Objective-c are subclasses of _Object Oriented Language_
+![left fit](languages.png)
+
+What do they all have in common?
+
+^with so many wildly different languages all being object oriented; what do they all have in common?
+
+^the interface
 
 ---
 
-## _Object Oriented Language_ is just an interface
+> _*The Interface*_
+a mechanism for enabling dynamic behavior with static code
+
+^it enables polymorphism
+
+---
+#Interface Example
+
+```java
+public class Person {
+    public String name;
+
+    public void printName() {
+        System.out.println(name);
+    }
+}
+
+public class VipPerson extends Person {
+    public void printName() {
+        System.out.println("Mr. " + name);
+    }
+}
+
+public static void displayPerson(Person p) {
+    p.printName();
+}
+```
 
 ---
 
-interesting things about interfaces is that there is no
-data and there is no behavior
-its just a set of guidelines for playing nicely with others
+# Why Object Oriented Programming?
+
+^what is academic, why has implications
+
+---
+If OOP is useful at all...
+
+![inline](moreawesome.png)
+
+^ more awesome operator
+
+^ first lets define more awesome
 
 ---
 
-and that is what oop is really about
-interfaces which enable run time variability
+#What is a program?
 
-maybe in a later slide I want to say functions and behavior
-as two interfaces
-get/save data (structs) -- memory access is just a behavior
-runtime behavior variability (polymorphism)
-structs aren't oop
-all thats left is variability, which can be implemented any way
-but all require interfaces; thats it
+A program is a machine executable implementation of
+a set of constraints that maps a set of inputs over time to a set of outputs over time.
 
----
 
-we can get back to that
-maybe a better question is why oop?
+![inline](aprogram.pdf)
+
+
+^other constriants: performance, portability, binary size
 
 ---
 
-if oop is useful at all, then there is some set of features
-F in some world W that satisfies
+#What is more awesome?
 
-my program + F >> (more awesome operator) my program
-(maybe some emojii version)
+![left fit](twoprograms.pdf)
 
-for some definition of more awesome otherwise what's the point?
+* two programs
+* meet same constraints
+* is there an A more awesome than B?
 
-cute diagram
-
----
-
-I'd really like to believe that the more awesome operator
-exists in a objective sense.
-
-and I do believe it exists (minus some controllable human factors)
+^try to get audience to guess
 
 ---
 
-software nothing more than a machine executable implementation of
-a set of constraints that maps inputs over time to a set of outputs over time
+#What is more awesome?
 
-those constraints are called features (and possibly some misfeatures)
+What if we did one of these to B?
 
-keep in mind performance can be a constraint, as can the machine running it,
-binary size, not just the obvious stuff
-
----
-
-so given two different programs that meet these constraints for the same
-set of inputs and outputs
-
-can a be more aesome than b? (diagram)
-
-can anyone think of an example?
+* Rot13 all variable and function names
+* Minify
 
 ---
 
-take program a and rot13 on all the variables/functions/classes to get b
-or run minified javascript (although that does solve a binary size constraint)
-how many people would like to inherit a program that only existed in its minified version
+#Why is A more awesome than B?
 
-a is more awesome than b
-
----
-
-given that all these things are identical why is a more awesome than b?
-
+^fish for answer (Change)
 same performance
-they both get it done in exactly the same way
-they both work, who cares?
+done the same way
+both work who cares?
 why would someone have to work on it?
 
-fish for the fact that things will change.
+---
+
+> Change
+
+^programs change
 
 ---
 
-#Change
+![left fit](uncle.jpg)
 
-the unwritten constraint, software always changes
-they both don't meet that one constraint the same
+#Uncle Bob
 
----
+Robert C. Martin
 
-Uncle Bob slide
+The secondary value of software is to meet the user's needs.
+The primary value is to change.
 
-quotation, photo
-the number one feature of software is change
-the second is to do what people want
-site, books, great guy
-maybe two slides?
+^very sharp guy
+silly videos
+brushed off at first, but now convinced
 
 ---
 
 int main() {} is an example of new code
+
+^not buying it? here's an example
 
 ---
 
