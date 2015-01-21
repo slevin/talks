@@ -294,63 +294,94 @@ silly videos
 brushed off at first, but now convinced
 
 ---
+#New Code
 
-int main() {} is an example of new code
+```java
+public static void main(String[] args) {
+
+}
+```
 
 ^not buying it? here's an example
 
 ---
 
-add hello world, just changed old code
+#Changing Old Code
+
+```java
+public static void main(String[] args) {
+    System.out.println("Nice to meet you, Mr. Bowie");
+}
+```
 
 ---
 
-add more, changed old code
+#Changing Old Code
+
+```java
+public static void main(String[] args) {
+    if (args.length > 0) {
+        System.out.println("Nice to meet you, " + args[0]);
+    } else {
+        System.out.println("Nice to meet you, Mr. Bowie");
+    }
+}
+```
 
 ---
 
-add more, changed old code
+#Changing Old Code
+
+```java
+public static void main(String[] args) {
+    String greeting = "Nice to meet you, ";
+    if (args.length > 0) {
+        if (args[1].equals("Iman")) {
+            System.out.println(greeting + "Mrs. Bowie");
+        } else {
+            System.out.println(greeting + args[0]);
+        }
+    } else {
+        System.out.println(greeting + "Mr. Bowie");
+    }
+}
+```
 
 ---
 
-get it?
+> Get it?
+
+^ forget about future features you can't predict
+approx 100% of time you are changing your own old code
 
 ---
 
-forget about the future features you can't predict
-99.99999999% of the time you are changing old code
+> What's wrong with old code?
+
+> Why is change a problem?
+
+^there must be some answer otherwise people wouldn't
+prefer starting fresh over fixing old stuff
 
 ---
 
-but what's wrong with old code? if you are just adding
-features aren't you just adding code?
+# Answer: Internal Constraints
 
-why is change a problem?
+^ every line of code you add to meet an external constraint / feature
+also contributes internal constraints to the pool
 
-if change is guaranteed, change + old code
-has to come at some cost otherwise it wouldn't be a big
-deal, but we know from experience it is
-the more old code the more change comes at a cost
-
-fish for why is that?
-
-(this slide needs help)
+and those existing internal constraints may conflict directly
+with the code needed to implement the next external constraint
 
 ---
 
-answer: internal constraints
+makes sense that if we can reduce the internal constraints
 
-as you satisfy external constraints
-you set up implicit internal constraints
 
-often/almost always those internal constraints
-are in conflict with the new feature so they must
-be changed; that has to be done in a way that
-still satisfies existing constraints
 
-that's hard
 
 ---
+
 
 variable behavior is necessarily a reduction of internal constraints
 which means it is easier to change from a mathematical point of view
@@ -518,6 +549,7 @@ how to find these seams, where to put code, and how to do it
 code smells
 
 ---
+
 I think we have an awkward relationship with the code we write.
 We feel uncomfortable with some choices, worried we didn't do it as well as others
 
