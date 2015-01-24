@@ -375,101 +375,178 @@ with the code needed to implement the next external constraint
 
 ---
 
-makes sense that if we can reduce the internal constraints
+> Internal Constraints are a burden on Change
 
-
-
-
----
-
-
-variable behavior is necessarily a reduction of internal constraints
-which means it is easier to change from a mathematical point of view
-
+^ makes sense that if we can reduce the internal constraints
+we can make code easier to change
 
 ---
 
-so given two otherwise similar programs, the one that
-is more adaptable to change is the one that is more awesome
+![right fit](letoverlambda.jpg)
+
+#Duality of Syntax
+
+## Let Over Lambda
+## Doug Hoyte
+
+Duality of Syntax
+
+Same syntax multiple behaviors
+
+Richard Gabriel: Compression
+
+^really talking about lisp and macros, but the
+concept still holds
+
+its abstraction
 
 ---
 
-of course change isn't an absolute; change to what?
-a may be more amenable to change to y
-while b may be more amenable to change to x
+# The Interface
+The OOP mechanism for duality of syntax
 
-its an imperfect world, tough
+```java
+public class Person {
+    public String name;
 
----
+    public void printName() {
+        System.out.println(name);
+    }
+}
 
-amenable to change means total amount of effort
-required to introduce a change:
-clarity, internal constraints, reduction of bugs
-introduced in the process
+public class VipPerson extends Person {
+    public void printName() {
+        System.out.println("Mr. " + name);
+    }
+}
 
----
+public static void displayPerson(Person p) {
+    p.printName();
+}
+```
 
-if there's anything to take away from this, its this
-idea of the importance of change.
+^this has less internal constraints than inlined code
+displayPerson can stay the same but still do different
+things at different times
 
-for every feature you implement, make a little mental todo
-(or a real todo, I do)
-that says, ok I got this working; can I move things around
-so it will be easier to change this code in the future
-(who may be you, with my wtf face on)
-
----
-
-
-when I first heard the idea watching Uncle Bob videos
-I brushed it off, "yeah interesting whatever"
-
-but day in day out over the past year its hit me over and
-over again, "oh yeah, totally!"
+^interface doesn't just mean java interface but the
+concept behind it
 
 ---
 
-so in order for oop to be helpful, oop must provide
-features that help manage change
+# The Interface
+
+```java
+public class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public setName(String newName) {
+        name = newName;
+    }
+}
+```
+
+^getters and setters are such a common practice
+for solving this vary problem (change)
+and are exactly this, a new interface
+
+^by using the getter/setter interface I can change code
+in one place, instead of everywhere
 
 ---
 
-duality of syntax
+#The Interface
 
-hoyte, picture of book
+* Enables the same functionality with _fewer internal constraints_
+* Fewer internal constraints, means _easier to change_
+* Easier to change means _more awesome!_ :dancers:
 
-some quotation
+^the idea of managing change is a key takeaway
 
-lisp macros
-
-(richard gabriel calls it compression)
-
----
-
-the interface is the primary mechanism for enabling this
-duality of syntax
-
-I can have a block of code that works one way, and when it needs to
-behave differently I can enable that behavior change without having to
-change other parts. its variability of behavior its polymorphism
+^as you code and implement features, think about
+what you also could do to make things easier to change
+in the future
 
 ---
 
-example of setters and getters as on obvious interface separation
+> "I'm already using an object oriented language so I'm already doing this."
 
 ---
 
-probably need some examples of duality of syntax
-in different languages (static and dynamic interfaces)
+> Probably not
+
+^or at least not as much as you could
+
+^oop as a tool for dependency management and modeling
 
 ---
 
-encapsulation is something that people bring up with oop, but again
-this is just an interface; we set up rules where code can play nicely
-with others and behind that wall we can change functionality
+# Building with Abstractions vs Abstracting
 
-when we talk about abstractions, we are essentially putting a set of behaviors
-behind an interface
+* UIViewController
+* UIView
+* UITableViewDelegate
+* Hollywood Pattern and UIApplicationDelegate
+
+
+^these are abstractions other people have come up with
+so we can benefit from duality of syntax of their code
+
+^fish for why its called hollywood pattern
+"don't call us we'll call you"
+
+---
+
+# Origin of the 5000 line class
+
+### Step 1: Take an existing abstraction
+### Step 2: Give it a name that matches our problem domain
+### Step 3: Add code to do stuff
+
+^its not unreasonable to get in this situation
+its perfectly natural
+
+---
+
+> Step 4: Refactor
+
+---
+
+# It's too hard to get it right the first time.
+
+^trying to solve how to implement a feature
+and whats the best place to put this code
+I'm not smart enough
+
+---
+
+![left fit](refactoring.jpg)
+
+#Refactoring
+
+##Martin Fowler
+
+_Code Smells_
+
+* Duplicated Code
+* Shotgun Surgery
+* Long Method
+* Speculative Generality
+* _etc._
+
+^tools for possible places and possible ways to make things better
+
+^smell indicates something might need throwing out in the refridgerator
+
+---
+
+duplicated code as an example
+
+shotgun surgery as an example
 
 ---
 
@@ -480,95 +557,12 @@ aren't directly supported by the language
 
 ---
 
-my irrifutable logic by now has convinced you that lessening the costs
-of change is an act of awesomeness, and that oop theoretically provides
-this awesomeness by making change less of a burden, so how do you do
-oop?
-
----
-
-easy right? new file, type in class {} add some properties and functions
-sweet, oop; what's the big deal? We all do it every day.
-
----
-
-wrong
-
----
-
-occasionaly my mind is brought back to the concept of
-cargo cults and cargo cult programming
-
-image, story behind the term
-
-maybe more of a conclusion
-
----
-
-mistaking the artifacts of a process for the process itself
-
-(profound theory about life actually)
-
----
-
-the artifacts are the classes objects interfaces
-
-but the process is seeing where the same code can be leveraged to work
-in different places and inserting interfaces that can isolate those changes
-from other working parts of the code
-
----
-
-key concept here is that is a process that goes on every step of the way as
-we code. and being part of this process of finding seams where we can isolate
-changes while leveraging other code we've written to accommodate internal constraints
-is the magic that produces useful objects
-
----
-
-The hard part is knowing where to put these seams. If we don't know where the next part
-of code that will have to change will be, how can we justify abstractions.
-
-That's a reasonable complaint. And its exactly how we end up with 300 line methods and 1000line
-classes. We don't know so we get something working, perhaps we could have more flexibility
-but it works, so why change it. I've got Artem banging on my desk asking me when I'm finished!
-
----
-
-I don't think we can get it right the first time. Experience gives us some intuition but
-its not enough. Refactoring is the only way.
-
----
-
-Refactoring Book
-
-definition: refactoring vs programming
-
-how to find these seams, where to put code, and how to do it
-
-code smells
-
----
-
 I think we have an awkward relationship with the code we write.
 We feel uncomfortable with some choices, worried we didn't do it as well as others
 
 its important to get a better relationship and see it as part of a process; a process
 of continual improvement and adjustment; the lessons in refactoring can help us take
 a more mature position
-
-
----
-
-in my experience, people only refactor when they have to in order to
-enable a feature that they can't figure any way around
-
-I just don't think people do it enough. I'm only just getting better
-from rarely doing it myself. Its a shame because its fun when you know
-what you are after.
-
-its not just move code around willy nilly, its to find ways to enable
-duality of syntax which becomes a seam we can use forever after
 
 ---
 
@@ -595,55 +589,10 @@ and without tests refactoring is too hard
 
 ---
 
-I know. You are all thinking you subclass views and view controllers, and
-delegate objects. You are doing this way more than I am giving you credit for.
+testing is about using the same code in two different places once in the context
+of a test another in the context of the app
 
----
-
-There's a difference between abstracting and building with abstractions.
-
-somone else already has done the abstracting. because they want to use
-duality of syntax so you can leverage their work
-
----
-
-from the first moment you start a new project in xcode, they hand you a template with
-an empty view controller. They wrote the app already, you are just filling in the blanks
-in the empty method calls they already gave you.
-
-The app is loaded into memory and starts running their code, then their code says, "anything else you want?"
-
-this is the inversion of control pattern, or sometimes called the Hollywood pattern
-"dont call us we'll call you"
-
-the abstraction has already been built
-
-so when it comes to finding where to put the code we just put it where we can find an empty
-space. repeat until we have a 500 line funtion or 1000line class.
-
-its not weird is normal, but I propose its suboptimal
-
----
-
-The refactoring book has a number of places to start looking for places where oop can help
-organize code and get dependencies under control
-
-which they call code smells. Not because your code necessarily stinks but because things
-are starting to get stale and it might be worth a little time cleaning out the fridge
-
-
----
-
-the easiest place to start finding ways to improve organization is duplicated code
-
-duplicated blocks of code indicates that there is an abstract concept that has
-meaning in the logic. when you have duplicated code, pull it out into a function
-give it a good name and start combining
-
-this first step always starts uncovering things for me and I start pulling apart more
-code and giving it better names and a few hours later I'm usually happy with the results
-
-plus its fun
+it encourages finding seams that enable change
 
 ---
 
@@ -683,16 +632,6 @@ code is a very useful tool to solve some of these problems
 
 ---
 
-oo becomes more than just a tool for conceptualization of the problem space
-
-eg, I'm going to write some network code so let me create a class called NetwrokManager
-
-its fine for that but it doesn't offer any features particularly more powerful than just
-
-opening a file and start typing in functions like you would do in C
-
----
-
 the overall code starts to take on a component feel where parts of your program resemble libraries
 like the ones given to us by apple that we can use to build the features of our app
 
@@ -722,13 +661,6 @@ little graph (bill joy/linus torvalds joke)
 
 ---
 
-* oop is not the only way to provide benefits
-
-functional, static analyzers, better language idioms where the default choice
- of the language (the lazy choice) is the choice that makes future change easier
-
----
-
 most importantly I think is recognizing that the most important thing we can do is
 pay attention to our development process
 
@@ -745,6 +677,8 @@ our process then the code will be goo
 * be emotionally invested in your process not the code that results from that process
 
 ---
+
+
 
 
 
@@ -777,24 +711,12 @@ in lua even namespaces are part of the language in tables
 * over engineered example of hello world
 http://developers.slashdot.org/comments.pl?sid=33602&cid=3634763
 
+* encapsulation is just behavior behind an interface
 
+* cargo cult story
 
-story arc
+* confusing artifacts for process
 
-what is oo?
-its interfaces
-why oo; if its worthwhile it must enable better
-what's better?
-reducing the burden of change is better
-therefore oo is worthwhile if it reduces the burden of change
-key concept code that does job with reduced burden of change >> code that does its job
-there is something you can do with oo that you cannot with procedural progrmming
-...and that's enabling different run time behavior
-same code, different behavior == less dependencies and less code to change
-too hard to write code this way, so we add refactoring as an extra step after implementing
-if you want code that just does its job just write it
-if you want code that is easy to change refactor (writing is editing)
-and this gives us problems to solve
-refactoring book, architectures, design patterns all point us to possible
-directions to take the code that will help manage dependencies
-and they all depend on oo
+* oop is not the only way to provide benefits
+functional, static analyzers, better language idioms where the default choice
+ of the language (the lazy choice) is the choice that makes future change easier
