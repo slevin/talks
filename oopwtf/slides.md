@@ -688,25 +688,14 @@ good we are at dealing with abstractions
 
 ---
 
-
-polymorphism is an implicit if statement
-
-example of person and vip person
+> Its hard to refactor without tests
 
 ---
 
+![right fill](tdd.jpg)
 
-another problem with refactoring is that its hard without tests. rearranging
-working code is just not worth it unless you have to or feel comfortable
-
-refactoring tools are one way
-
-but unit tests are the other.
-
----
-
-Kent Beck, TDD Explained
-
+bffKent Beck, TDD Explained
+ssxxxxx
 big fan. my code has tests
 because it has tests I move it around and have confidence that I can
 move it to something that is more awesome, and by more awesome I mean
@@ -718,17 +707,13 @@ every line of code is born in the furnaces of Mt. Change?
 
 ---
 
-so without refactoring, the kind of oop that leverages duality of syntax is too hard
-and without tests refactoring is too hard
-
----
-
 testing is about using the same code in two different places once in the context
 of a test another in the context of the app
 
 it encourages finding seams that enable change
 
 ---
+
 
 performance
 
