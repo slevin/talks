@@ -477,11 +477,11 @@ in the future
 
 ---
 
-> Probably not
+> Maybe...
 
-^or at least not as much as you could
+^oop as a tool for dependency management and modeling, sure
 
-^oop as a tool for dependency management and modeling
+^as a tool for unentangling code, probably less so
 
 ---
 
@@ -514,6 +514,20 @@ its perfectly natural
 
 > Step 4: Refactor
 
+^a step that receives too little attention in our industry
+
+---
+
+# Writing is Rewriting
+
+“By the time I am nearing the end of a story, the first part will have been reread and altered and corrected at least one hundred and fifty times. I am suspicious of both facility and speed. Good writing is essentially rewriting.” _-Roald Dahl_
+
+“I have rewritten — often several times — every word I have ever published. My pencils outlast their erasers.” _-Vladimir Nabokov_
+
+^preparing for this talk is an example
+
+^helping Grace become a better writer is an example
+
 ---
 
 # It's too hard to get it right the first time.
@@ -530,6 +544,8 @@ I'm not smart enough
 
 ##Martin Fowler
 
+_Our "Manual of Style"_
+
 _Code Smells_
 
 * Duplicated Code
@@ -540,7 +556,11 @@ _Code Smells_
 
 ^tools for possible places and possible ways to make things better
 
-^smell indicates something might need throwing out in the refridgerator
+^although smell kinda sounds like saying your code stinks
+the metaphor they were after is that smells are possible
+indicators that something needs your attention at some point
+
+^feel free to check out my book at my desk
 
 ---
 
@@ -548,23 +568,133 @@ duplicated code as an example
 
 shotgun surgery as an example
 
----
-
-design patterns and architecture are the same thing
-if they make code better then they do it because they enable
-change. in most cases, they provide flexibility in ways that
-aren't directly supported by the language
 
 ---
 
-I think we have an awkward relationship with the code we write.
-We feel uncomfortable with some choices, worried we didn't do it as well as others
+#Continuous Refactoring
 
-its important to get a better relationship and see it as part of a process; a process
-of continual improvement and adjustment; the lessons in refactoring can help us take
-a more mature position
+* A perspective change: messes become problems with solutions
+* Object oriented programming becomes a tool for taking things apart as well as putting things together
+* Code starts to feel like a library of parts collaborating to produce the product
+* Its fun and satisfying
+
+^oop allows you to isolate independent parts of the code
+
+^I guartantee after a few tries using that book, you'll do something
+you love that you wouldn't have done before
 
 ---
+
+![right fill](rich.jpg)
+
+#Rich Hickey
+
+##Creator of Cojure
+
+##Simple Made Easy
+
+##Easy: nearby, subjective
+
+##Simple: not intertwined, objective (not easy)
+
+^best talk ever
+
+^german is not easy if you don't know it
+
+^simple often means many smaller separate pieces
+
+---
+
+> Simplicity comes after complexity, not before.
+
+^you've got to work for it
+
+^nobody gets it right the first time
+
+^oop is just one tool among many to help with the process
+
+---
+
+> Some Comments...
+
+---
+
+![left fit](gof.jpg)
+
+#Design Patterns
+
+Abstractions for managing dependencies not
+directly supported by the language.
+
+Build with: *bad*
+
+Refactor to: *super sweet*
+
+^feel snobby and overblown as something to build with
+
+^see my books
+
+---
+
+> Indirecton without Abstraction
+
+^design patterns without a problem
+
+---
+
+> Make it work first, then make it better
+
+---
+
+# "Where is anything getting done?!"
+
+Abstractions mean more smaller pieces
+
+Trading in physical locality for conceptual locality
+
+Bad abstractions and bad names is still bad code
+
+^just because we create an abstraction doesn't mean
+we are making things better
+
+^over estimate how easy giant methods and classes
+are to deal with
+
+---
+
+## Abstractions aren't the problem
+
+### Average adult has a 15,000 word vocabulary
+
+### We don't understand every line of external libraries
+
+### We certainly don't know what's behind Apple's abstractions
+
+### Even worse...
+
+---
+
+# We don't even write our own programs
+
+Contribution to your app breakdown:
+
+![inline](loc.pdf)
+
+^everything is an abstraction
+the fact we don't think about it shows how
+good we are at dealing with abstractions
+
+^story of bacteria cells in our body outnumbers our own
+
+---
+
+
+polymorphism is an implicit if statement
+
+example of person and vip person
+
+---
+
 
 another problem with refactoring is that its hard without tests. rearranging
 working code is just not worth it unless you have to or feel comfortable
@@ -582,6 +712,10 @@ because it has tests I move it around and have confidence that I can
 move it to something that is more awesome, and by more awesome I mean
 reduces the burden of future changes
 
+maybe last as my version
+
+every line of code is born in the furnaces of Mt. Change?
+
 ---
 
 so without refactoring, the kind of oop that leverages duality of syntax is too hard
@@ -596,68 +730,16 @@ it encourages finding seams that enable change
 
 ---
 
-one problem I've definitely felt and I hear people have is as code starts getting broken
-up you have to start looking around in lots of places to understand what anything does
-
-I hear you, I've felt that. Its also the case that we might over estimate how easy to understand
-100 line methods and 1000 line classes really are. Those are really daunting structures. And
-I'd rather see those broken down to a few well named classes with well named functions.
-
-Naming is hard, and I'm very guilty of giving things bad names. But its also part of the process
-and we just keep working it to make things better.
+performance
 
 ---
 
-I think the process of continual refactoring sheds a lot of light on Design Patterns.
+I think we have an awkward relationship with the code we write.
+We feel uncomfortable with some choices, worried we didn't do it as well as others
 
-As abstractions to build with, they feel snobby, complex, and overblown. But from the perspective
-of refactoring as we begin to get our dependencies under control, they start showing up as
-useful structures that enable our code to handle change without massive refactorings.
-
----
-
-when viewed through the lens of refactoring for dependency management as part of the process
-we see new problems to solve
-
-these are fun problems
-
----
-
-using oo to create abstractions with which we can isolate changes from other parts of the
-code is a very useful tool to solve some of these problems
-
----
-
-* when used like this oo is a scalpal not a building block
-
----
-
-the overall code starts to take on a component feel where parts of your program resemble libraries
-like the ones given to us by apple that we can use to build the features of our app
-
----
-
-simple made easy
-complex vs simple
- rich hickey talk
-
----
-
-some people complain that code broken down to abstractions is harder to follow
-
-I understand and can share this opinion at times, but I don't think that is an
-inherent problem with abstractions
-
-
-* you don't know how apple's code works, not a single line of it
-but you depend on it vitally
-
----
-
-* just like that story how compared to the number of bacteria cells in your gut to number
-of cells that are you is a tiny fraction; the number of lines
-
-little graph (bill joy/linus torvalds joke)
+its important to get a better relationship and see it as part of a process; a process
+of continual improvement and adjustment; the lessons in refactoring can help us take
+a more mature position
 
 ---
 
@@ -677,6 +759,12 @@ our process then the code will be goo
 * be emotionally invested in your process not the code that results from that process
 
 ---
+
+breakup longer slides? to shorter quotes
+
+add backgrounds representing change, complexity
+dynamism
+
 
 
 
