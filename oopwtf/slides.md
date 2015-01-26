@@ -688,14 +688,14 @@ good we are at dealing with abstractions
 
 ---
 
-> Its hard to refactor without tests
+> Its hard to refactor without any tests
 
 ---
 
 ![right fill](tdd.jpg)
 
-bffKent Beck, TDD Explained
-ssxxxxx
+Kent Beck, TDD Explained
+
 big fan. my code has tests
 because it has tests I move it around and have confidence that I can
 move it to something that is more awesome, and by more awesome I mean
@@ -714,12 +714,8 @@ it encourages finding seams that enable change
 
 ---
 
-
-performance
-
----
-
 I think we have an awkward relationship with the code we write.
+
 We feel uncomfortable with some choices, worried we didn't do it as well as others
 
 its important to get a better relationship and see it as part of a process; a process
