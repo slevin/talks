@@ -564,7 +564,9 @@ indicators that something needs your attention at some point
 
 ---
 
+
 duplicated code as an example
+
 
 shotgun surgery as an example
 
@@ -615,10 +617,6 @@ you love that you wouldn't have done before
 
 ---
 
-> Some Comments...
-
----
-
 ![left fit](gof.jpg)
 
 #Design Patterns
@@ -629,8 +627,6 @@ directly supported by the language.
 Build with: *bad*
 
 Refactor to: *super sweet*
-
-^feel snobby and overblown as something to build with
 
 ^see my books
 
@@ -690,29 +686,22 @@ good we are at dealing with abstractions
 
 > Its hard to refactor without any tests
 
+^if moving things around might break something
+you probably won't do it when you have to
+
 ---
 
 ![right fill](tdd.jpg)
 
-Kent Beck, TDD Explained
+#Test Driven Development
+##Kent Beck
 
-big fan. my code has tests
-because it has tests I move it around and have confidence that I can
-move it to something that is more awesome, and by more awesome I mean
-reduces the burden of future changes
+Tests are developed at the same time as the code.
 
-maybe last as my version
-
-every line of code is born in the furnaces of Mt. Change?
+Seems to elicit rather strong emotions.
 
 ---
 
-testing is about using the same code in two different places once in the context
-of a test another in the context of the app
-
-it encourages finding seams that enable change
-
----
 
 I think we have an awkward relationship with the code we write.
 
