@@ -1,6 +1,22 @@
 slidenumbers: true
 
-# OOPWTF?
+# Object Oriented Programming
+
+^original title
+
+^people look at me funny, how is that interesting?
+
+---
+
+# Object Oriented Techniques and their Role in the Iterative Software Development Process
+
+---
+
+# Object Oriented Programming, Why _YOU_ suck at it and why _I_ rule.
+
+## (Official title)
+
+^controversy for the win
 
 ---
 
@@ -19,13 +35,24 @@ slidenumbers: true
 
 # What is OOP?
 
-_hackneyed question, I know_
+_over-asked uninteresting question_
+
+^functions + data, classes, polymorphism, encapsulation, protection
+
+
+---
+
+# What is OOP?
+
+_over-asked uninteresting question_
+
+_with an interesting answer_
 
 ^functions + data, classes, polymorphism, encapsulation, protection
 
 ---
 
-Lisp
+Common Lisp
 
 ```lisp
 (defclass srt-time ()
@@ -58,9 +85,10 @@ Lisp
   (make-instance 'srt-time :hr hr :mi mi :se se :ms ms)))
 ```
 
-^30 years old but is the model for clojure, go, rust
-where implicit namespacing of methods doesn't restrict
-adding new methods
+
+^over 30 years old but is the model for clojure, go, rust
+
+^polymorphism a la carte
 
 ---
 
@@ -177,11 +205,20 @@ Objective-c
 
 ![left fit](languages.png)
 
+#Object Oriented Langauges
+
+All very different.
+
+<br><br>
 What do they all have in common?
 
 ^with so many wildly different languages all being object oriented; what do they all have in common?
 
 ^the interface
+
+---
+
+> _*The Interface*_
 
 ---
 
@@ -213,13 +250,18 @@ public static void displayPerson(Person p) {
 }
 ```
 
+^we will get back to this
+
 ---
 
 # Why Object Oriented Programming?
 
-^what is academic, why has implications
+_more interesting question_
+
+^its not just for entertainment
 
 ---
+
 If OOP is useful at all...
 
 ![inline](moreawesome.png)
@@ -232,8 +274,8 @@ If OOP is useful at all...
 
 #What is a program?
 
-A program is a machine executable implementation of
-a set of constraints that maps a set of inputs over time to a set of outputs over time.
+A program is a machine executable definition of
+a process that maps a set of inputs over time to a set of outputs over time meeting a set of given constraints.
 
 
 ![inline](aprogram.pdf)
@@ -243,7 +285,7 @@ a set of constraints that maps a set of inputs over time to a set of outputs ove
 
 ---
 
-#What is more awesome?
+#What is More Awesome?
 
 ![left fit](twoprograms.pdf)
 
@@ -255,7 +297,7 @@ a set of constraints that maps a set of inputs over time to a set of outputs ove
 
 ---
 
-#What is more awesome?
+#What is More Awesome?
 
 What if we did one of these to B?
 
@@ -370,7 +412,7 @@ prefer starting fresh over fixing old stuff
 ^ every line of code you add to meet an external constraint / feature
 also contributes internal constraints to the pool
 
-and those existing internal constraints may conflict directly
+^and those existing internal constraints may conflict directly
 with the code needed to implement the next external constraint
 
 ---
@@ -393,12 +435,12 @@ Duality of Syntax
 
 Same syntax multiple behaviors
 
-Richard Gabriel: Compression
+Richard Gabriel: "Compression"
 
 ^really talking about lisp and macros, but the
 concept still holds
 
-its abstraction
+
 
 ---
 
@@ -425,9 +467,7 @@ public static void displayPerson(Person p) {
 }
 ```
 
-^this has less internal constraints than inlined code
-displayPerson can stay the same but still do different
-things at different times
+^this has less internal constraints
 
 ^interface doesn't just mean java interface but the
 concept behind it
@@ -450,8 +490,9 @@ public class Person {
 }
 ```
 
-^getters and setters are such a common practice
-for solving this vary problem (change)
+^getters and setters
+
+^for solving this vary problem (change)
 and are exactly this, a new interface
 
 ^by using the getter/setter interface I can change code
@@ -479,9 +520,9 @@ in the future
 
 > Maybe...
 
-^oop as a tool for dependency management and modeling, sure
+^oop as a tool for problem conceptualization and modeling, sure
 
-^as a tool for unentangling code, probably less so
+^as a tool for disentangling code, probably less so
 
 ---
 
@@ -514,7 +555,7 @@ its perfectly natural
 
 > Step 4: Refactor
 
-^a step that receives too little attention in our industry
+^a step too often skipped over
 
 ---
 
@@ -530,7 +571,7 @@ its perfectly natural
 
 ---
 
-# It's too hard to get it right the first time.
+# It's too hard to get code right the first time.
 
 ^trying to solve how to implement a feature
 and whats the best place to put this code
@@ -544,7 +585,7 @@ I'm not smart enough
 
 ##Martin Fowler
 
-_Our "Manual of Style"_
+_"Elements of Style"_
 
 _Code Smells_
 
@@ -564,21 +605,11 @@ indicators that something needs your attention at some point
 
 ---
 
-
-duplicated code as an example
-
-
-shotgun surgery as an example
-
-
----
-
 #Continuous Refactoring
 
 * A perspective change: messes become problems with solutions
 * Object oriented programming becomes a tool for taking things apart as well as putting things together
-* Code starts to feel like a library of parts collaborating to produce the product
-* Its fun and satisfying
+* Abstractions are fun!
 
 ^oop allows you to isolate independent parts of the code
 
@@ -591,19 +622,21 @@ you love that you wouldn't have done before
 
 #Rich Hickey
 
-##Creator of Cojure
+###Creator of Cojure
 
-##Simple Made Easy
+###Simple Made Easy
 
-##Easy: nearby, subjective
+###Easy: nearby, subjective
 
-##Simple: not intertwined, objective (not easy)
+###Simple: not intertwined, objective (not easy)
 
 ^best talk ever
 
 ^german is not easy if you don't know it
 
 ^simple often means many smaller separate pieces
+
+^he's talking about abstractions
 
 ---
 
@@ -621,7 +654,7 @@ you love that you wouldn't have done before
 
 #Design Patterns
 
-Abstractions for managing dependencies not
+Abstractions for managing dependencies in ways not
 directly supported by the language.
 
 Build with: *bad*
@@ -638,17 +671,13 @@ Refactor to: *super sweet*
 
 ---
 
-> Make it work first, then make it better
-
----
-
 # "Where is anything getting done?!"
 
 Abstractions mean more smaller pieces
 
 Trading in physical locality for conceptual locality
 
-Bad abstractions and bad names is still bad code
+Bad abstractions and bad names are still bad code
 
 ^just because we create an abstraction doesn't mean
 we are making things better
@@ -702,79 +731,42 @@ Seems to elicit rather strong emotions.
 
 ---
 
-
-I think we have an awkward relationship with the code we write.
-
-We feel uncomfortable with some choices, worried we didn't do it as well as others
-
-its important to get a better relationship and see it as part of a process; a process
-of continual improvement and adjustment; the lessons in refactoring can help us take
-a more mature position
+> In Conclusion...
 
 ---
 
-most importantly I think is recognizing that the most important thing we can do is
-pay attention to our development process
+>Iterative Development
 
-we have strange relationship with the code we write and can get emotionally invested
-in it when we are proud of it; or feel terrible when we mess up; or worry that other
-people are writing better code that we aren't capable of
+^inescapable process
 
----
-
-the truth is good code is the result of good process applied over and over; we will never
-get things perfect, but if we distance ourselves from the code and invest emotionally in
-our process then the code will be goo
-
-* be emotionally invested in your process not the code that results from that process
+^features will come and go
 
 ---
 
-breakup longer slides? to shorter quotes
+> Its too hard to get it right the first time
 
-add backgrounds representing change, complexity
-dynamism
+^or what was right could become less right
 
+---
 
+> Don't just stop at "It Works"
 
-
-
-
-style, mostly a matter of taste; taste is hard to target
-we have to reach for things that we believe are more objective
-
-eg, I could write all my function names in russian some people
-would prefer that I'm sure
+---
 
 
-do I want to talk about different types of oop and how they support this?
+> Step 4: _Refactor_
 
-clojure/swift/rust/go are similar
+> Make it work first,
+then make it >>:dancers:
 
-class based oop is just namespaces
-  and a way to provide subtypes
-  plus it comes at a cost of not being able to extend types
+^remove duplication
 
-plus various degree of permission/hiding depending on language
-- this isn't abstraction, its safety which has its ups and downs
+^break things down into independent chunks
 
-* type based ploymorphism is an abstracted if statement
-it can't change but in lua and javascript it can but
-those you can reassign the path
+^don't just build with abstractions
 
-* would love to talk about javascript and lua style of objects
-in lua even namespaces are part of the language in tables
- its brilliant
+---
 
-* over engineered example of hello world
-http://developers.slashdot.org/comments.pl?sid=33602&cid=3634763
+> _fin_
 
-* encapsulation is just behavior behind an interface
-
-* cargo cult story
-
-* confusing artifacts for process
-
-* oop is not the only way to provide benefits
-functional, static analyzers, better language idioms where the default choice
- of the language (the lazy choice) is the choice that makes future change easier
+> (_p.s. I still rule_)
